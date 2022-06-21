@@ -5,7 +5,7 @@ require('dotenv').config();
 const axios = require('axios');
 const {YOUR_API_KEY}=process.env
 const router = Router();
-const {Recipe,Diet,conn} = require('../db');
+const {Recipe,Diet} = require('../db');
 const { getALLRecipes,getDBrecipesID,getAPIrecipesID } = require('../services/recipes');
 
 // Configurar los routers
@@ -48,7 +48,6 @@ router.get('/recipes',async function (req,res) {
         return res.status(400).json(error.message)
     }
 })
-
 
 router.get('/recipes/:idRecipe', async function (req,res) {
     try {
@@ -99,7 +98,7 @@ router.get('/diets', async (req,res) => {
         "vegan"
     ]
     types.forEach(e=> {
-        Diet.findOrcreate({
+        Diet.findOrCreate({
             where: { name: e }
         })
     });
@@ -110,20 +109,21 @@ router.get('/diets', async (req,res) => {
 router.post('/recipes', async  (req,res) => {
     try {
         const {name,summary,healthScore,steps,diets} = req.body
-        // "diets": [
-		//  "gluten free",
-		//  "dairy free"
-	    //  ],
         const newRecipe = await Recipe.create({
             name,
             summary,
             healthScore,
             steps,
         })
-
+        let dietTypes = await Diet.findAll({
+            where: { name: diets}
+        })
+        
+        await newRecipe.addDiet(dietTypes)
+        return res.send('OK aguante racing')
 
     } catch (error) {
-        
+        return res.status(400).send(error.message)
     }
 })
 
@@ -131,3 +131,5 @@ router.post('/recipes', async  (req,res) => {
 
 
 module.exports = router;
+
+
