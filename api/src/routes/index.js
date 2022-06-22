@@ -26,7 +26,7 @@ router.get('/recipes',async function (req,res) {
                     return {
                         image: e.image,
                         name: e.name,
-                        diets: e.diets,
+                        diets: (typeof(e.diets[0])==='string')? e.diets : e.diets.map(e => e.name),
                         id: e.id
                     }
                 })
@@ -38,7 +38,7 @@ router.get('/recipes',async function (req,res) {
                 return {
                     image: e.image,
                     name: e.name,
-                    diets: e.diets,
+                    diets: (typeof(e.diets[0])==='string')? e.diets : e.diets.map(e => e.name),
                     id: e.id
                 }
             })
@@ -54,6 +54,14 @@ router.get('/recipes/:idRecipe', async function (req,res) {
         let {idRecipe}=req.params
         if (idRecipe.length===36) {
             let DBrecipe = await getDBrecipesID(idRecipe)
+            DBrecipe = {
+                id: DBrecipe.id,
+                name: DBrecipe.name,
+                summary: DBrecipe.summary,
+                healthScore: DBrecipe.healthScore,
+                steps: DBrecipe.steps,
+                diets: DBrecipe.diets.map(e => e.name)
+            } 
             if (DBrecipe) return res.json(DBrecipe)
         }else{
             let APIrecipe = await getAPIrecipesID(idRecipe)
@@ -126,7 +134,6 @@ router.post('/recipes', async  (req,res) => {
         return res.status(400).send(error.message)
     }
 })
-
 
 
 
