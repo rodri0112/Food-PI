@@ -60,7 +60,9 @@ router.get('/recipes/:idRecipe', async function (req,res) {
                 summary: DBrecipe.summary,
                 healthScore: DBrecipe.healthScore,
                 steps: DBrecipe.steps,
-                diets: DBrecipe.diets.map(e => e.name)
+                diets: DBrecipe.diets.map(e => e.name),
+                image: DBrecipe.image,
+                dishTypes: DBrecipe.dishTypes
             } 
             if (DBrecipe) return res.json(DBrecipe)
         }else{
@@ -122,14 +124,13 @@ router.post('/recipes', async  (req,res) => {
             summary,
             healthScore,
             steps,
+            image: "https://previews.123rf.com/images/topvectors/topvectors1909/topvectors190902005/130642139-young-man-reading-book-of-recipes-and-cooking-in-the-kitchen-vector-illustration.jpg"
         })
         let dietTypes = await Diet.findAll({
             where: { name: diets}
         })
-        
         await newRecipe.addDiet(dietTypes)
-        return res.send('OK aguante racing')
-
+        return res.send(newRecipe)
     } catch (error) {
         return res.status(400).send(error.message)
     }

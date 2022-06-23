@@ -23,6 +23,13 @@ module.exports = (sequelize) => {
     },
     steps: {
       type: DataTypes.ARRAY(DataTypes.JSON)
+    },
+    dishTypes: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: ["main dish"]
+    },
+    image: {
+      type: DataTypes.STRING
     }
   },{
     timestamps: false
