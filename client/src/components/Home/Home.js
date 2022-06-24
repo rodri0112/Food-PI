@@ -1,27 +1,33 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllRecipes, getDietTypes } from "../../actions";
 import RecipesGrid from "../Recipes/RecipesGrid";
+import './Home.css'
 
 
 export default function Home() {
   const dispatch = useDispatch();
-  let { allRecipes, dietTypes } = useSelector((state) => state);
+  let { dietTypes } = useSelector((state) => state);
   React.useEffect(() => {
     dispatch(getDietTypes());
-    //dispatch(getAllRecipes())
+    dispatch(getAllRecipes())
   }, []);
   return (
-    <div>
+    <div className="Home">
       <div>
+        <div>
+            <Link to='/create'>
+                <label>Crear Receta</label>
+            </Link>
+        </div>
         <div>
           <label>Buscar por Nombre</label>
           <input type="text" placeholder="Pollo frito..."></input>
         </div>
-        <div>
+        <div className="typeContainer">
           <label>Tipo de Dieta</label>
-          <div>
+          <div className="typefilter">
             {dietTypes.map((e) => {
               return (
                 <div key={e.id}>

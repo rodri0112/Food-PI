@@ -13,7 +13,7 @@ function RecipesGrid() {
             recipes.map(e => {
                 return (
                     <div className='recipe' key={e.id}>
-                        <Link to={`/home/${e.id}`} className='detailink'>`
+                        <Link to={`/home/${e.id}`} className='detailink'>
                             <Recipe
                                 name={e.name}
                                 image={e.image}

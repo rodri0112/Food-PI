@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getRecipeDetail } from '../../actions'
+import './RecipeDetail.css'
 
 export const RecipeDetail = (props) => {
     const dispatch = useDispatch()
@@ -10,17 +11,16 @@ export const RecipeDetail = (props) => {
     useEffect(() => {
         dispatch(getRecipeDetail(id))
     },[])
-    console.log(recipeDetail.dishTypes)
   return (
     <div>
         <div>
-            <h2>{recipeDetail.name}</h2>
+            <h2 className='h3D'>{recipeDetail.name}</h2>
         </div>
         <div>
             <img src={recipeDetail.image} alt='img' className='image'/>
         </div>
         <div>
-            <h4>Ideal for: {recipeDetail.dishTypes?.join(', ')}</h4>
+            <h4 className='h4D'>Ideal for {recipeDetail.dishTypes?.join(', ')}</h4>
         </div>
         <div>
             {
@@ -32,18 +32,19 @@ export const RecipeDetail = (props) => {
             }
         </div>
         <div>
-            <p>
+            <p className='pe'>
                 {recipeDetail.summary?.replace(/<[^>]*>?/gm, '')}
             </p>
         </div>
         <div>
-            <h4>{recipeDetail.healthScore}</h4>
+            <h4 className='h4D'>Health Score: {recipeDetail.healthScore}</h4>
         </div>
         <div>
+            <h4 className='h4D'>Step by step:</h4>
             {
-                recipeDetail.steps?.map( e => {
+                recipeDetail.steps&&recipeDetail.steps.map( e => {
                     return (
-                        <div>
+                        <div className='steps' key={e.number}>
                             <h4>{e.number}</h4>
                             <p>{e.step}</p>
                         </div>

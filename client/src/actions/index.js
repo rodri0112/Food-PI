@@ -1,4 +1,4 @@
-import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, ADD_RECIPE } from "./actionTypes";
+import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, CREATE_RECIPE } from "./actionTypes";
 const axios = require('axios')
 
 export const getAllRecipes = () => {
@@ -19,5 +19,12 @@ export const getRecipeDetail = (id) => {
     return async function (dispatch) {
         return axios.get(`http://localhost:3001/recipes/${id}`)
         .then(recipeDetail => dispatch({type: GET_RECIPE_DETAIL, payload: recipeDetail.data}))
+    }
+}
+
+export const createRecipe = (recipe) => {
+    return async function (dispatch) {
+        return axios.post(`http://localhost:3001/recipes/`,recipe)
+        .then(data=> dispatch({type: CREATE_RECIPE, payload: data.data}))
     }
 }

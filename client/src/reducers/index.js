@@ -1,4 +1,4 @@
-import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, ADD_RECIPE } from "../actions/actionTypes.js";
+import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, CREATE_RECIPE } from "../actions/actionTypes.js";
 
 const initialState = {
     recipes: [],
@@ -29,6 +29,12 @@ export default function reducer(state = initialState, action) {
                 recipeDetail: action.payload
             }
             
+        case CREATE_RECIPE:
+            return {
+                ...state,
+                allRecipes: [action.payload,...state.allRecipes]
+            }
+
         default:
             return {...state}
     }
