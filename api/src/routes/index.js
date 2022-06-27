@@ -27,7 +27,8 @@ router.get('/recipes',async function (req,res) {
                         image: e.image,
                         name: e.name,
                         diets: (typeof(e.diets[0])==='string')? e.diets : e.diets.map(e => e.name),
-                        id: e.id
+                        id: e.id,
+                        healthScore: e.healthScore
                     }
                 })
                 return res.json(washed)
@@ -39,7 +40,8 @@ router.get('/recipes',async function (req,res) {
                     image: e.image,
                     name: e.name,
                     diets: (typeof(e.diets[0])==='string')? e.diets : e.diets.map(e => e.name),
-                    id: e.id
+                    id: e.id,
+                    healthScore: e.healthScore
                 }
             })
             return res.json(washed)
@@ -124,10 +126,10 @@ router.post('/recipes', async  (req,res) => {
             summary,
             healthScore,
             steps,
-            image: "https://previews.123rf.com/images/topvectors/topvectors1909/topvectors190902005/130642139-young-man-reading-book-of-recipes-and-cooking-in-the-kitchen-vector-illustration.jpg"
+            image: "https://i0.wp.com/hungryoungwoman.com/wp-content/uploads/2018/10/IMG_4926-2819293401-1540154381813.jpg?fit=940%2C628&ssl=1"
         })
         let dietTypes = await Diet.findAll({
-            where: { name: diets}
+            where: { name: diets} //diets=['vegetarian', 'lacto ovo vegetarian']
         })
         await newRecipe.addDiet(dietTypes)
         return res.send(newRecipe)

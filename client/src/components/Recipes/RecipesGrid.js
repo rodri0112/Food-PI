@@ -1,18 +1,17 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import Recipe from './Recipe'
+import './RecipesGrid.css'
 
 
 
-function RecipesGrid() {
-    const recipes = useSelector(state => state.recipes)
+function RecipesGrid({currentRecipes}) {
   return (
-    <div className='RecipeGrid'>
+    <div className='RecipesGrid'>
         {
-            recipes.map(e => {
+            currentRecipes?.map(e => {
                 return (
-                    <div className='recipe' key={e.id}>
+                    <div className='recipeholder' key={e.id}>
                         <Link to={`/home/${e.id}`} className='detailink'>
                             <Recipe
                                 name={e.name}

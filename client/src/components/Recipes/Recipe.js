@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './Recipe.css'
 
 function Recipe(props) {
     let {name, image, diets} = props
@@ -15,7 +15,7 @@ function Recipe(props) {
             {
                 diets?.map( e => {
                     return (
-                        <h5 className='diet' key={e}>{e}</h5>
+                        <h5 className='diets' key={e}>{e}</h5>
                     )
                 })
             }

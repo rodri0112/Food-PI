@@ -1,18 +1,3 @@
-.typefilter {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    text-align: left;
-    align-self: center;
-    }
-
-.typeContainer{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
 .Home{
     background-image: url("C:\Users\Rodri\Documents\Henry\PI-Food-main\client\src\images\1000_F_509199540_hHx8Md24EvSzKEKTvIyPvQemmbmbtJLE.jpg");
     background-size: cover;

@@ -1,0 +1,15 @@
+.navbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.typeContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.orderContainer{
+    display: flex;
+    flex-direction: row;
+}

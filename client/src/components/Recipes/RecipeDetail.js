@@ -10,7 +10,7 @@ export const RecipeDetail = (props) => {
 
     useEffect(() => {
         dispatch(getRecipeDetail(id))
-    },[])
+    },[dispatch,id])
   return (
     <div>
         <div>

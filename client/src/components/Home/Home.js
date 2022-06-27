@@ -1,55 +1,50 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { getAllRecipes, getDietTypes } from "../../actions";
+import Paging from "../Paging/Paging";
 import RecipesGrid from "../Recipes/RecipesGrid";
+import NavBar from "../NavBar/NavBar";
 import './Home.css'
 
 
 export default function Home() {
+
   const dispatch = useDispatch();
-  let { dietTypes } = useSelector((state) => state);
+
+
+  let { recipes } = useSelector((state) => state);
+
+  const [currentpage, setCurrentPage] = useState(1)
+  const recipesPerPage = 9
+
+  const indexOfLastRecipe = currentpage * recipesPerPage
+  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage
+
+  let currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe)
+
+  const paging = (pagenumber) => {
+    setCurrentPage(pagenumber)
+  }
+
+
+
   React.useEffect(() => {
     dispatch(getDietTypes());
     dispatch(getAllRecipes())
-  }, []);
+  }, [dispatch]);
+
+
   return (
     <div className="Home">
       <div>
-        <div>
-            <Link to='/create'>
-                <label>Crear Receta</label>
-            </Link>
-        </div>
-        <div>
-          <label>Buscar por Nombre</label>
-          <input type="text" placeholder="Pollo frito..."></input>
-        </div>
-        <div className="typeContainer">
-          <label>Tipo de Dieta</label>
-          <div className="typefilter">
-            {dietTypes.map((e) => {
-              return (
-                <div key={e.id}>
-                  <input type="checkbox" id={e.id} />
-                  <label>{e.name}</label>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <div>
-          <label>Ordenar</label>
-          <select name="select">
-            <option value="value1">A-Z</option>
-            <option value="value2">Z-A</option>
-            <option value="value3">Mayor Health-Score</option>
-            <option value="value4">Menor Health-Score</option>
-          </select>
-        </div>
+        <NavBar/>
       </div>
       <div>
-        <RecipesGrid />
+        <Paging recipesPerPage={recipesPerPage} recipesL={recipes.length} paging={paging}/>
+      </div>
+      <div>
+        <RecipesGrid currentRecipes={currentRecipes}/>
       </div>
     </div>
   );

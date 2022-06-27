@@ -1,4 +1,4 @@
-import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, CREATE_RECIPE } from "./actionTypes";
+import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, CREATE_RECIPE, SEARCH_RECIPE, FILTER_RECIPES_BY_TYPE, RESET_RECIPES, ORDER_RECIPES} from "./actionTypes";
 const axios = require('axios')
 
 export const getAllRecipes = () => {
@@ -28,3 +28,26 @@ export const createRecipe = (recipe) => {
         .then(data=> dispatch({type: CREATE_RECIPE, payload: data.data}))
     }
 }
+export const searchRecipe = (name) => {
+    return async function (dispatch) {
+        return axios.get(`http://localhost:3001/recipes?name=${name}`)
+        .then(nameRecipes=> dispatch({type: SEARCH_RECIPE, payload: nameRecipes.data}))
+    }
+}
+export const filterRecipesByType = (types) => {
+    return async function (dispatch) {
+        return dispatch({type: FILTER_RECIPES_BY_TYPE, payload: types})
+    }
+}
+export const resetRecipes = () => {
+    return async function (dispatch) {
+        return dispatch({type: RESET_RECIPES, payload: true})
+    }
+}
+
+export const orderRecipes = (order) => {
+    return async function (dispatch) {
+        return dispatch({type: ORDER_RECIPES, payload: order})
+    }
+}
+
