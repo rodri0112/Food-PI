@@ -1,21 +1,19 @@
 .h3D{
-    color:white;
     margin-top: 0;
 }
 
-.h4D{
-    color: white;
-}
+
 
 .pe{
-    color: white;
     font-family: cursive;
 }
 
-.diet{
-    color: white;
-}
 .steps{
-    color: white;
     margin-bottom: 0;
+}
+
+.recipedetail{
+    color: white;
+    background-image: url('C:\Users\Rodri\Documents\Henry\PI-Food-main\client\src\images\60112018573a25fc933638ee1891efa4.jpg');
+    background-size: cover;
 }

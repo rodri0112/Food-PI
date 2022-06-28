@@ -1,0 +1,9 @@
+.recipecreate{
+    background-image: url('C:\Users\Rodri\Documents\Henry\PI-Food-main\client\src\images\pizza-salchichones-sabrosa-fondo-concreto-negro_79782-102.jpg');
+    background-size: cover;
+    color: white;
+}
+.formin{
+    display: flex;
+    flex-direction: column;
+}

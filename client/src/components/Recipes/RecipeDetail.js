@@ -12,7 +12,7 @@ export const RecipeDetail = (props) => {
         dispatch(getRecipeDetail(id))
     },[dispatch,id])
   return (
-    <div>
+    <div className='recipedetail'>
         <div>
             <h2 className='h3D'>{recipeDetail.name}</h2>
         </div>

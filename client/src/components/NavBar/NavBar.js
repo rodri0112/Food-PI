@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector} from 'react-redux'
 import { SearchBar } from '../SearchBar/SearchBar';
 import { filterRecipesByType, orderRecipes } from '../../actions';
-import Logo from '../../images/lady.png'
+import Logo from '../../images/fork.png'
 import './NavBar.css'
 
 function NavBar() {
@@ -41,19 +41,23 @@ function NavBar() {
   return (
     <div className='navbar'>
         <div>
-            {/* <img src={Logo}/> */}
+            <img src={Logo} className='logo'/>
         </div>
         <div className="typeContainer">
           <label>Diet Type:</label>
-          <select className="typefilter" onChange={handleOnChange}>
-            <option value='ivalid'>select type to add</option>
-            {dietTypes.map((e) => {
-              return (
-                <option value={e.name} key={e.id}>{e.name}</option>
-              );
-            })}
-          </select>
-          <button onClick={handleClickAdd}>Add</button>
+          <div>
+            <select className="typefilter" onChange={handleOnChange}>
+              <option value='ivalid'>select type to add</option>
+              {dietTypes.map((e) => {
+                return (
+                  <option value={e.name} key={e.id}>{e.name}</option>
+                );
+              })}
+            </select>
+          </div>
+          <div>
+            <button onClick={handleClickAdd}>Add</button>
+          </div>
           <div>
             {typesArr?.map(e => {
                 return (
@@ -61,24 +65,28 @@ function NavBar() {
                 )
             })}
           </div>
-          <button onClick={handleClickApply}>Apply</button>
+          <div>
+            <button onClick={handleClickApply}>Apply</button>
+          </div>
         </div>
         <div className='orderContainer'>
           <label>Order:</label>
-          <select name="select" onChange={handleOrder}>
-            <option value="Unorder">...</option>
-            <option value="AZ">A-Z</option>
-            <option value="ZA">Z-A</option>
-            <option value="<HS">Most Health-Score</option>
-            <option value=">HS">Less Health-Score</option>
-          </select>
+          <div>
+            <select name="select" onChange={handleOrder}>
+              <option value="Unorder">...</option>
+              <option value="AZ">A-Z</option>
+              <option value="ZA">Z-A</option>
+              <option value="<HS">Most Health-Score</option>
+              <option value=">HS">Less Health-Score</option>
+            </select>
+          </div>
         </div>
         <div>
             <SearchBar reset={resetTypesArr}/>
         </div>
         <div>
-            <Link to='/create'>
-                <label>Crear Receta</label>
+            <Link to='/create' className='createlink'>
+                <button type='button'>Create Recipe</button>
             </Link>
         </div>
     </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { resetRecipes, searchRecipe } from '../../actions'
+import './SearchBar.css'
 
 export const SearchBar = ({reset}) => {
     let [name, setName] = useState('')
@@ -19,10 +20,16 @@ export const SearchBar = ({reset}) => {
     }
 
   return (
-    <div>
-        <input type='text' name='name' placeholder='Pork...' value={name} onChange={e => setName(e.target.value)}/>
-        <button onClick={handleClick}>Search</button>
-        <button onClick={handleReset}>View all</button>
+    <div className='searchcontainer'>
+        <div>
+          <input type='text' name='name' placeholder='Pork...' value={name} onChange={e => setName(e.target.value)}/>
+        </div>
+        <div>
+          <button onClick={handleClick}>Search</button>
+        </div>
+        <div>
+          <button onClick={handleReset}>View all</button>
+        </div>
     </div>
   )
 }
