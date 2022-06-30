@@ -90,10 +90,10 @@ export default function reducer(state = initialState, action) {
                 case '<HS':
                     functionpiolarda =  function (a,b) {
                         if (a.healthScore<b.healthScore) {
-                            return -1
+                            return 1
                         }
                         if (a.healthScore>b.healthScore) {
-                            return 1
+                            return -1
                         }
                         return 0
                     }
@@ -101,10 +101,10 @@ export default function reducer(state = initialState, action) {
                 case '>HS':
                     functionpiolarda =  function (a,b) {
                         if (a.healthScore<b.healthScore) {
-                            return 1
+                            return -1
                         }
                         if (a.healthScore>b.healthScore) {
-                            return -1
+                            return 1
                         }
                         return 0
                     }
@@ -115,7 +115,7 @@ export default function reducer(state = initialState, action) {
             }
             return {
                 ...state,
-                recipes: state.recipes.sort(functionpiolarda)
+                recipes: state.recipes.sort(functionpiolarda)//recipes=[1,2,3]
             }
 
         default:

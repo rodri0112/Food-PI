@@ -22,13 +22,13 @@ export const SearchBar = ({reset}) => {
   return (
     <div className='searchcontainer'>
         <div>
-          <input type='text' name='name' placeholder='Pork...' value={name} onChange={e => setName(e.target.value)}/>
+          <input className='input' type='text' name='name' placeholder='Pork...' value={name} onChange={e => setName(e.target.value)}/>
         </div>
         <div>
-          <button onClick={handleClick}>Search</button>
+          <button onClick={handleClick} className='btn'>Search</button>
         </div>
         <div>
-          <button onClick={handleReset}>View all</button>
+          <button onClick={handleReset} className='btn'>View all</button>
         </div>
     </div>
   )

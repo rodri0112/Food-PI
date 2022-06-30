@@ -8,4 +8,16 @@
     flex-direction: row;
     justify-content: center;
     gap: 7px;
+    height: 15px;
 }
+
+.apage{
+    cursor: pointer;
+}
+
+.apage:hover{
+    font-size: larger;
+    color: brown;
+}
+
+

@@ -8,13 +8,13 @@ const Paging = ({recipesPerPage, recipesL, paging}) => {
     }
     
   return (
-    <nav>
+    <nav className='pagenav'>
         <ul className='pagelist'>
             {
                 pageNumbers && pageNumbers.map(e => 
                     (
                         <li key={e} className='pagenumber'>
-                            <a  onClick={() => paging(e)}>{e}</a>
+                            <a className='apage' onClick={() => paging(e)}>{e}</a>
                         </li>
                     )
                 )

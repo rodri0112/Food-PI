@@ -14,6 +14,55 @@
 
 .recipedetail{
     color: white;
-    background-image: url('C:\Users\Rodri\Documents\Henry\PI-Food-main\client\src\images\60112018573a25fc933638ee1891efa4.jpg');
+    background-image: url('C:\Users\Rodri\Documents\Henry\PI-Food-main\client\src\images\pexels-ave-calvar-martinez-5038396.jpg');
     background-size: cover;
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
+
+.box{
+    width: 70%;
+    background-color: rgba(11, 6, 6, 0.64);
+    backdrop-filter: 5px;
+    border-radius: 15px;
+}
+
+.detailtypes{
+    display: flex;
+    justify-content: center;
+    gap: 15px
+}
+
+.detailoading{
+    background-image: url('C:\Users\Rodri\Documents\Henry\PI-Food-main\client\src\images\calum-lewis-vA1L1jRTM70-unsplash.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 844px;
+}
+
+.loaderd{
+    padding-top: 10em;
+    padding-right: 20em;
+}
+
+.loaderd span {
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    animation: blur 3s linear infinite;
+    line-height: 20px;
+    transition: all 0.5s;
+    letter-spacing: 0.2em;
+   }
+   
+   @keyframes blur {
+    0%, 90% {
+     filter: blur(0);
+    }
+   
+    50% {
+     filter: blur(10px);
+    }
+   }

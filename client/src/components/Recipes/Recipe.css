@@ -1,3 +1,39 @@
 .recipe{
     border: 1px solid rgb(0, 0, 0, 0.5);
+    width: 340px;
+    height: 500px;
+    background-color: #161925c9;
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
 }
+
+.title{
+    height: 50px;
+}
+
+.diets{
+    margin: 5px;
+}
+
+.image{
+    border-radius: 10px;
+}
+
+.card {
+    border-radius: 10px;
+    padding-top: 5px;
+    backdrop-filter: blur(5px);
+    width: 340px;
+    height: 500px;
+    background-color: #212121a4;
+    box-shadow: 15px 15px 30px #191919,
+                 -15px -15px 30px #292929;
+    transition: border-radius cubic-bezier(0.075, 0.82, 0.165, 1) 1s,
+                 transform cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+   }
+   
+   .card:hover {
+    border-bottom-right-radius: 50px;
+    border-top-left-radius: 50px;
+    transform: scale(1.05);
+   }

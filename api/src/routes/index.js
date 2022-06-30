@@ -18,7 +18,6 @@ router.get('/recipes',async function (req,res) {
     try {
         let {name} = req.query
         const recipes= await getALLRecipes()
-        console.log('first')
         if (name) {
             let filtered = await recipes.filter(e => e.name.toLowerCase().includes(name.toString().toLowerCase()))
             if (filtered.length) {

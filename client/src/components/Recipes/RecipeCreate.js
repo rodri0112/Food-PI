@@ -1,12 +1,37 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { createRecipe } from '../../actions'
+import { createRecipe, getDietTypes } from '../../actions'
 import './RecipeCreate.css'
 
+function validate(newrecipe) {
+    let errors = {};
+    if (!newrecipe.name) {
+      errors.name = "Name required";
+    } else if (!newrecipe.summary) {
+      errors.summary = "summary required";
+    } else if (!newrecipe.healthScore) {
+      errors.healthScore = "HealthScore required";
+    }
+    else if (newrecipe.healthScore > 100 || newrecipe.healthScore < 0) {
+      errors.healthScore = "HealthScore value must be (0-100)";
+    }
+    else if (newrecipe.steps.length === 0) {
+      errors.steps = "At least one step required";
+    } 
+    else if (newrecipe.diets.length === 0) {
+      errors.diets = "At least one diet required";
+    }  
+    return errors;
+}
+
 export const RecipeCreate = () => {
+    
+    const dispatch = useDispatch()
+    React.useEffect(() => {
+        dispatch(getDietTypes());
+      }, [dispatch]);
 
     const { dietTypes } = useSelector(state => state)
-    const dispatch = useDispatch()
     const [newrecipe, setRecipe] = useState({
         name: '',
         summary:'',
@@ -16,6 +41,10 @@ export const RecipeCreate = () => {
         steps: [],
         diets:[]
     })
+    const [error,setError] = useState({})
+    
+    console.log(error)
+
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(createRecipe(newrecipe))
@@ -26,8 +55,12 @@ export const RecipeCreate = () => {
             ...newrecipe ,
             [e.target.name]: e.target.value
          })
+        setError(validate({
+            ...newrecipe ,
+            [e.target.name]: e.target.value
+        }))
     } 
-
+    
     const handleClickAdd = (e) => {
         setRecipe({
             ...newrecipe,
@@ -39,6 +72,16 @@ export const RecipeCreate = () => {
             ],
             number: newrecipe.number+1
         })
+        setError(validate({
+            ...newrecipe,
+            steps: [...newrecipe.steps,
+                {
+                number: newrecipe.number,
+                step: newrecipe.step
+                }
+            ],
+            number: newrecipe.number+1
+        }))
         
     }
 
@@ -48,12 +91,20 @@ export const RecipeCreate = () => {
                 ...newrecipe,
                 diets: [...newrecipe.diets, e.target.value]
             })
+            setError(validate({
+                ...newrecipe,
+                diets: [...newrecipe.diets, e.target.value]
+            }))
         }else {
             let filtered = newrecipe.diets.filter(d => d!==e.target.value)
             setRecipe({
                 ...newrecipe,
                 diets: filtered
             })
+            setError(validate({
+                ...newrecipe,
+                diets: filtered
+            }))
         }
     }
 

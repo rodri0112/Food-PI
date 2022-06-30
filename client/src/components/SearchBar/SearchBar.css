@@ -3,3 +3,32 @@
     flex-direction: row;
     gap: 5px;
 }
+
+.input {
+    line-height: 21.5px;
+    border: 2px solid transparent;
+    border-bottom-color: rgba(22, 108, 9, 0.91);
+    padding: .2rem 0;
+    outline: none;
+    background-color: transparent;
+    color: #d0cfd3;
+    transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+   }
+   
+   .input:focus, input:hover {
+    outline: none;
+    padding: .2rem 1rem;
+    border-radius: 0.5rem;
+    border-color: rgba(3, 110, 13, 0.724); 
+   }
+
+  
+   
+   .input::placeholder {
+    color: rgb(45, 43, 43);
+   }
+   
+   .input:focus::placeholder {
+    opacity: 0;
+    transition: opacity .3s;
+   }

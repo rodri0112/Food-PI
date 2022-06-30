@@ -4,8 +4,8 @@ import './Recipe.css'
 function Recipe(props) {
     let {name, image, diets} = props
   return (
-    <div className='recipe'>
-        <div>
+    <div className='card'>
+        <div className='title'>
             <h3 className='name'>{name}</h3>
         </div>
         <div>
