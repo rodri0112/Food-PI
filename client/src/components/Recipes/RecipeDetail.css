@@ -2,7 +2,14 @@
     margin-top: 0;
 }
 
-
+.homebtn{
+    position: absolute;
+    left: 50px;
+    padding: 5px 10px;
+    border: 1px solid rgb(9, 126, 9);
+    border-radius: 5px;
+    background-color: rgba(11, 6, 6, 0.64);
+}
 
 .pe{
     font-family: cursive;

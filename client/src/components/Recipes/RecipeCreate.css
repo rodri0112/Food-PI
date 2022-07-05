@@ -7,6 +7,16 @@
     justify-content: center;
 }
 
+.homebtncr{
+    position: absolute;
+    left: 50px;
+    top: 30px;
+    padding: 5px 10px;
+    border: 1px solid rgb(9, 126, 9);
+    border-radius: 5px;
+    background-color: rgba(11, 6, 6, 0.64);
+}
+
 .createcontainer{
     display: flex;
     width: 80%;

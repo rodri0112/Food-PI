@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory,Link } from "react-router-dom";
 import { createRecipe, getDietTypes } from "../../actions";
 import "./RecipeCreate.css";
+var reg=/[^((0-9)|(a-z)|(A-Z)|\s)]/g
 
 function validate(newrecipe) {
   let errors = {};
@@ -118,6 +119,9 @@ export const RecipeCreate = () => {
 
   return (
     <div className="recipecreate">
+      <div className="homebtncr">
+        <Link className='detailink' to={`/home`}>Home</Link>
+      </div>
       <div className="createcontainer">
         <form className="form" onSubmit={handleSubmit}>
           <div className="formin">
