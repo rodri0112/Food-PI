@@ -6,22 +6,26 @@ import { filterRecipesByType, orderRecipes } from "../../actions";
 import Logo from "../../images/fork.png";
 import "./NavBar.css";
 
-function NavBar() {
+function NavBar({paging}) {
   const dispatch = useDispatch();
   let { dietTypes } = useSelector((state) => state);
   const [type, setType] = useState("");
   const [typesArr, setTypesArr] = useState([]);
 
   const handleOnChange = (e) => {
-    if (type !== "invalid") setType(e.target.value);
+    setType(e.target.value);
   };
 
   const handleClickAdd = (e) => {
     if (type && !typesArr.includes(type)) setTypesArr([...typesArr, type]);
+    dispatch(filterRecipesByType([...typesArr, type]));
+    paging(1)
   };
 
-  const handleClickApply = (e) => {
-    dispatch(filterRecipesByType(typesArr));
+  const handleClickClear = (e) => {
+    setTypesArr([])
+    dispatch(filterRecipesByType([]));
+    paging(1)
   };
 
   const resetTypesArr = () => {
@@ -30,6 +34,7 @@ function NavBar() {
 
   const handleOrder = (e) => {
     dispatch(orderRecipes(e.target.value));
+    paging(1)
   };
 
   return (
@@ -53,7 +58,7 @@ function NavBar() {
       <div className="typeContainer">
         <div className="custom-dropdown types">
           <select onChange={handleOnChange}>
-            <option value="ivalid">select type to add</option>
+            <option disabled selected defaultValue>select type to add</option>
             {dietTypes.map((e) => {
               return (
                 <option value={e.name} key={e.id}>
@@ -74,7 +79,7 @@ function NavBar() {
         </div>
         
         <div>
-          <button className="btn" onClick={handleClickApply}>Apply</button>
+          <button className="btn" onClick={handleClickClear}>Clear</button>
         </div>
       </div>
       

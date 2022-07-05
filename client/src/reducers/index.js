@@ -4,7 +4,7 @@ const initialState = {
     allRecipes:[],
     recipes: [],
     filteredRecipes: [],
-    recipeDetail: {},
+    recipeDetail: [],
     dietTypes: []
 }
 
@@ -33,13 +33,19 @@ export default function reducer(state = initialState, action) {
         case CREATE_RECIPE:
             return {
                 ...state,
-                recipes: [action.payload,...state.recipes]
             }
 
         case SEARCH_RECIPE:
-            return {
-                ...state,
-                recipes: action.payload
+            if (action.payload.message) {
+                alert("No recipes found")
+                return {
+                    ...state,
+                }
+            }else{
+                return {
+                    ...state,
+                    recipes: action.payload
+                }
             }
 
         case RESET_RECIPES:
@@ -50,6 +56,12 @@ export default function reducer(state = initialState, action) {
 
         case FILTER_RECIPES_BY_TYPE:
             let news = []
+            if (!action.payload.length) {
+                return {
+                    ...state,
+                    recipes: state.allRecipes
+                }
+            }
             state.recipes.forEach(r => {
                 let aux = action.payload.map(t => {
                     if (!r.diets.includes(t)) return false
@@ -57,9 +69,16 @@ export default function reducer(state = initialState, action) {
                 })
                 if (!aux.includes(false)) news.push(r)
             })
-            return {
-                ...state,
-                recipes: news
+            if(!news.length) {
+                alert('no recipes found')
+                return {
+                    ...state,
+                }
+            }else{
+                return {
+                    ...state,
+                    recipes: news
+                }
             }
 
         case ORDER_RECIPES:

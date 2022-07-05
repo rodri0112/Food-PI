@@ -7,15 +7,15 @@ export const RecipeDetail = (props) => {
   const dispatch = useDispatch();
   const recipeDetail = useSelector((state) => state.recipeDetail);
   const id = props.match.params.id;
-  useEffect(() => {
-    return () => {
-      dispatch(getRecipeDetail(0));
-    };
-  }, []);//revisar manejo de errores
 
   useEffect(() => {
     dispatch(getRecipeDetail(id));
+    return () => {
+      dispatch(getRecipeDetail('a'));
+    };
   }, [dispatch, id]);
+
+  
   return !RecipeDetail.length ? (
     <div className="detailoading">
       <div class="loaderd">
@@ -52,9 +52,9 @@ export const RecipeDetail = (props) => {
           })}
         </div>
         <div>
-          <p className="pe">
-            {recipeDetail.summary?.replace(/<[^>]*>?/gm, "")}
-          </p>
+          <p className="pe"
+            dangerouslySetInnerHTML={{__html: recipeDetail.summary}}//cambiar, con regEx
+          />
         </div>
         <div>
           <h4 className="h4D">Health Score: {recipeDetail.healthScore}</h4>

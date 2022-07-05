@@ -11,7 +11,6 @@ export default function Home() {
   const dispatch = useDispatch();
 
   let { recipes } = useSelector((state) => state);
-
   const [currentpage, setCurrentPage] = useState(1);
   const recipesPerPage = 9;
 
@@ -44,7 +43,7 @@ export default function Home() {
   ) : (
     <div className="Home">
       <div>
-        <NavBar />
+        <NavBar paging={paging}/>
       </div>
       <div className="paging">
         <Paging

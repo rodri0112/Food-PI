@@ -8,7 +8,7 @@ function Recipe(props) {
         <div className='title'>
             <h3 className='name'>{name}</h3>
         </div>
-        <div>
+        <div className='divimg'>
             <img src={image} alt='img' className='image'/>
         </div>
         <div className='dietTypeContainer'>

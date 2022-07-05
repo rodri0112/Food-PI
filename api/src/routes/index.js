@@ -30,7 +30,7 @@ router.get('/recipes',async function (req,res) {
                         healthScore: e.healthScore
                     }
                 })
-                return res.json(washed)
+                return res.status(200).json(washed)
             }
             return res.status(404).json("no recipes found")
         }else{
@@ -46,7 +46,7 @@ router.get('/recipes',async function (req,res) {
             return res.json(washed)
         }
     } catch (error) {
-        return res.status(400).json(error.message)
+        return res.status(404).json(error.message)
     }
 })
 
@@ -97,9 +97,6 @@ router.get('/diets', async (req,res) => {
         "gluten free",
         "dairy free",
         "paleolithic",
-        "vegetarian",
-        "lacto vegetarian",
-        "ovo vegetarian",
         "lacto ovo vegetarian",
         "primal",
         "whole 30",
@@ -125,12 +122,12 @@ router.post('/recipes', async  (req,res) => {
             summary,
             healthScore,
             steps,
-            image: "https://i0.wp.com/hungryoungwoman.com/wp-content/uploads/2018/10/IMG_4926-2819293401-1540154381813.jpg?fit=940%2C628&ssl=1"
+            image: "https://spoonacular.com/recipeImages/716426-312x231.jpg"
         })
         let dietTypes = await Diet.findAll({
             where: { name: diets} //diets=['vegetarian', 'lacto ovo vegetarian']
         })
-        await newRecipe.addDiet(dietTypes)
+        await newRecipe.addDiet(dietTypes)//dietTypes = array con los IDs y NAMEs de cada dietType q matchee con nombres de diets
         return res.send(newRecipe)
     } catch (error) {
         return res.status(400).send(error.message)

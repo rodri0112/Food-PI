@@ -36,7 +36,9 @@
 }
 
 .typearr{
-    position: relative;
+    position: absolute;
+    left: 0;
+    top: 55px;
 }
 
 .btn {

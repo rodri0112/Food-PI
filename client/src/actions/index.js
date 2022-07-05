@@ -17,8 +17,12 @@ export const getDietTypes = () => {
 
 export const getRecipeDetail = (id) => {
     return async function (dispatch) {
-        return await axios.get(`http://localhost:3001/recipes/${id}`)
-        .then(recipeDetail => dispatch({type: GET_RECIPE_DETAIL, payload: recipeDetail.data}))
+        try {  
+            return await axios.get(`http://localhost:3001/recipes/${id}`)
+            .then(recipeDetail => dispatch({type: GET_RECIPE_DETAIL, payload: recipeDetail.data}))
+        } catch (error) {
+            return (dispatch({type: GET_RECIPE_DETAIL, payload: []}))
+        }
     }
 }
 
@@ -32,6 +36,7 @@ export const searchRecipe = (name) => {
     return async function (dispatch) {
         return await axios.get(`http://localhost:3001/recipes?name=${name}`)
         .then(nameRecipes=> dispatch({type: SEARCH_RECIPE, payload: nameRecipes.data}))
+        .catch(error => dispatch({type: SEARCH_RECIPE, payload: error}))
     }
 }
 export const filterRecipesByType = (types) => {

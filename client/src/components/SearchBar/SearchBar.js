@@ -10,6 +10,7 @@ export const SearchBar = ({reset}) => {
     const handleClick = (e) => {
         e.preventDefault()
         dispatch(searchRecipe(name))
+        setName('')
     }
 
     const handleReset = (e) => {
