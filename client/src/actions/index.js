@@ -1,4 +1,4 @@
-import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, CREATE_RECIPE, SEARCH_RECIPE, FILTER_RECIPES_BY_TYPE, RESET_RECIPES, ORDER_RECIPES} from "./actionTypes";
+import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, CREATE_RECIPE, SEARCH_RECIPE, FILTER_RECIPES_BY_TYPE, RESET_RECIPES, ORDER_RECIPES, RESET_DETAIL} from "./actionTypes";
 const axios = require('axios')
 
 export const getAllRecipes = () => {
@@ -53,6 +53,11 @@ export const resetRecipes = () => {
 export const orderRecipes = (order) => {
     return async function (dispatch) {
         return dispatch({type: ORDER_RECIPES, payload: order})
+    }
+}
+export const resetdetail = (payload) => {
+    return async function (dispatch) {
+        return dispatch({type: RESET_DETAIL, payload})
     }
 }
 

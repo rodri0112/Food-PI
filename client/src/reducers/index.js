@@ -1,4 +1,4 @@
-import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, CREATE_RECIPE, SEARCH_RECIPE, FILTER_RECIPES_BY_TYPE, RESET_RECIPES, ORDER_RECIPES} from "../actions/actionTypes.js";
+import { GET_ALL_RECIPES, GET_RECIPE_DETAIL, GET_DIET_TYPES, CREATE_RECIPE, SEARCH_RECIPE, FILTER_RECIPES_BY_TYPE, RESET_RECIPES, ORDER_RECIPES, RESET_DETAIL} from "../actions/actionTypes.js";
 
 const initialState = {
     allRecipes:[],
@@ -86,10 +86,10 @@ export default function reducer(state = initialState, action) {
             switch (action.payload) {
                 case 'AZ':
                     functionpiolarda =  function (a,b) {
-                        if (a.name<b.name) {
+                        if (a.name.toLowerCase()<b.name.toLowerCase()) {
                             return -1
                         }
-                        if (a.name>b.name) {
+                        if (a.name.toLowerCase()>b.name.toLowerCase()) {
                             return 1
                         }
                         return 0
@@ -97,10 +97,10 @@ export default function reducer(state = initialState, action) {
                     break;
                 case 'ZA':
                     functionpiolarda =  function (a,b) {
-                        if (a.name<b.name) {
+                        if (a.name.toLowerCase()<b.name.toLowerCase()) {
                             return 1
                         }
-                        if (a.name>b.name) {
+                        if (a.name.toLowerCase()>b.name.toLowerCase()) {
                             return -1
                         }
                         return 0
@@ -137,6 +137,11 @@ export default function reducer(state = initialState, action) {
                 recipes: state.recipes.sort(functionpiolarda)//recipes=[1,2,3]
             }
 
+        case RESET_DETAIL:
+            return {
+                ...state,
+                recipeDetail:{}
+            }
         default:
             return {...state}
     }

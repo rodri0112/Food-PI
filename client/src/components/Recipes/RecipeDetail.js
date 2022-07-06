@@ -1,35 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getRecipeDetail } from "../../actions";
+import { getRecipeDetail, resetdetail } from "../../actions";
 import "./RecipeDetail.css";
 
 export const RecipeDetail = (props) => {
   const dispatch = useDispatch();
   const recipeDetail = useSelector((state) => state.recipeDetail);
-  let [loaded,setLoaded] = useState(false)
   const id = props.match.params.id;
 
   useEffect(() => {
     dispatch(getRecipeDetail(id));
-    setLoaded(true)
-    return () => setLoaded(false);
+    return () => dispatch(resetdetail());
   }, [dispatch, id]);
 
   
-  return !loaded ? (
-    <div className="detailoading">
-      <div class="loaderd">
-        <span>L</span>
-        <span>O</span>
-        <span>A</span>
-        <span>D</span>
-        <span>I</span>
-        <span>N</span>
-        <span>G</span>
-      </div>
-    </div>
-  ) : (
+  return (
     <div className="recipedetail">
       <div className="homebtn">
         <Link className='detailink' to={`/home`}>Home</Link>
