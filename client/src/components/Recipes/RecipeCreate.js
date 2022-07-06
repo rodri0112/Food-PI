@@ -3,21 +3,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory,Link } from "react-router-dom";
 import { createRecipe, getDietTypes } from "../../actions";
 import "./RecipeCreate.css";
-var reg=/[^((0-9)|(a-z)|(A-Z)|\s)]/g
 
 function validate(newrecipe) {
+  let whitespacesParameter =  /(?!^\s+$)^.*$/m;
+  let alphabeticalPattern = /^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$/;
+
+
   let errors = {};
+  if (!whitespacesParameter.test(newrecipe.name) || !alphabeticalPattern.test(newrecipe.name)){
+    errors.name= "Name cannot contain special characters or numbers"
+  }
   if (!newrecipe.name) {
     errors.name = "Name required";
-  } else if (!newrecipe.summary) {
+  }
+  if (!newrecipe.summary) {
     errors.summary = "summary required";
-  } else if (!newrecipe.healthScore) {
-    errors.healthScore = "HealthScore required";
-  } else if (newrecipe.healthScore > 100 || newrecipe.healthScore < 0) {
+  }
+  if (newrecipe.healthScore.toString().includes('e')){
+    errors.healthScore = "HealthScore cannot contain letters"
+  }
+  if (newrecipe.healthScore > 100 || newrecipe.healthScore < 0) {
     errors.healthScore = "HealthScore value must be (0-100)";
-  } else if (newrecipe.steps.length === 0) {
+  }
+  if (!newrecipe.healthScore) {
+    errors.healthScore = "HealthScore required";
+  }
+  if (newrecipe.steps.length === 0) {
     errors.steps = "At least one step required";
-  } else if (newrecipe.diets.length === 0) {
+  }
+  if (newrecipe.diets.length === 0) {
     errors.diets = "At least one diet required";
   }
   return errors;
@@ -63,20 +77,8 @@ export const RecipeCreate = () => {
   };
 
   const handleClickAdd = (e) => {
-    setRecipe({
-      ...newrecipe,
-      steps: [
-        ...newrecipe.steps,
-        {
-          number: newrecipe.number,
-          step: newrecipe.step,
-        },
-      ],
-      number: newrecipe.number + 1,
-      step: ''
-    });
-    setError(
-      validate({
+    if (newrecipe.steps.length<4) {
+      setRecipe({
         ...newrecipe,
         steps: [
           ...newrecipe.steps,
@@ -86,8 +88,24 @@ export const RecipeCreate = () => {
           },
         ],
         number: newrecipe.number + 1,
-      })
-    );
+        step: ''
+      });
+      setError(
+        validate({
+          ...newrecipe,
+          steps: [
+            ...newrecipe.steps,
+            {
+              number: newrecipe.number,
+              step: newrecipe.step,
+            },
+          ],
+          number: newrecipe.number + 1,
+        })
+      );
+    }else{
+      alert('max steps reached')
+    }
   };
 
   const handleCheck = (e) => {

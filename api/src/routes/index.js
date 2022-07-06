@@ -122,7 +122,7 @@ router.post('/recipes', async  (req,res) => {
             summary,
             healthScore,
             steps,
-            image: "https://spoonacular.com/recipeImages/716426-312x231.jpg"
+            image: "https://spoonacular.com/recipeImages/1241241-556x370.jpg"
         })
         let dietTypes = await Diet.findAll({
             where: { name: diets} //diets=['vegetarian', 'lacto ovo vegetarian']
@@ -133,7 +133,6 @@ router.post('/recipes', async  (req,res) => {
         return res.status(400).send(error.message)
     }
 })
-
 
 
 module.exports = router;
